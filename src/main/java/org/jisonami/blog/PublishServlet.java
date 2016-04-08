@@ -2,6 +2,7 @@ package org.jisonami.blog;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,6 +33,15 @@ public class PublishServlet extends HttpServlet{
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// 提示发布失败
+		}
+		// 查询该用户下的所有博客
+		List<Blog> blogs;
+		try {
+			blogs = blogService.queryByAuthor(req.getSession().getAttribute("username").toString());
+			req.setAttribute("blogs", blogs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		// 提示发布成功，3秒后跳转到blog页面
 		req.getRequestDispatcher("/WEB-INF/content/blog/blog.jsp").forward(req, resp);

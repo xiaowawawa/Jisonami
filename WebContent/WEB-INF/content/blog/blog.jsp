@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="org.jisonami.entity.Blog" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,6 +18,14 @@
 	<a href="blog/publishForward.do">全部博客</a><br/>
 	<a href="blog/publishForward.do">草稿箱</a><br/>
 	<a href="blog/publishForward.do">回收站</a><br/><br/>
-	
+	<%
+		List<Blog> blogs = (List<Blog>) request.getAttribute("blogs");
+		for(Blog blog: blogs){
+			out.println(blog.getTitle());
+			out.print("<br/>");
+			out.println(blog.getContent());
+			out.print("<br/></br/>");
+		}
+	%>
 </body>
 </html>
