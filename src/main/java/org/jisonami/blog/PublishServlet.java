@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jisonami.entity.Blog;
+
 public class PublishServlet extends HttpServlet{
 
 	/**
@@ -17,7 +19,9 @@ public class PublishServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		Blog blog = new Blog();
+		blog.setTitle(req.getParameter("title"));
+		blog.setContent(req.getParameter("content"));
+
 	}
 }

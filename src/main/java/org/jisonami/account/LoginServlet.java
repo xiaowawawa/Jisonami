@@ -27,6 +27,7 @@ public class LoginServlet extends HttpServlet {
 		try {
 			if(userService.validate(user)){
 				// 若匹配，跳转到blog主页
+				req.setAttribute("username", user.getName());
 				req.getRequestDispatcher("/WEB-INF/content/blog/blog.jsp").forward(req, resp);
 			} else {
 				// 若不匹配，提示用户名或密码错误

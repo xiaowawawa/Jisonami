@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.UUID;
 
 import org.jisonami.entity.User;
 import org.jisonami.sql.DBUtils;
+import org.jisonami.util.StringUtils;
 
 public class UserService {
 	public boolean validate(User user) throws SQLException{
@@ -27,7 +27,7 @@ public class UserService {
 		return false;
 	}
 	public boolean save(User user) throws SQLException{
-		user.setId(generateId());
+		user.setId(StringUtils.generateUUID());
 		Connection conn = DBUtils.getConnection();
 		String sql = "insert into t_user(id, name, password) values(?, ?, ?)";
 		PreparedStatement preStmt = conn.prepareStatement(sql);
@@ -62,8 +62,5 @@ public class UserService {
 			return true;
 		}
 		return false;
-	}
-	private static String generateId(){
-		return UUID.randomUUID().toString().replace("-", "");
 	}
 }

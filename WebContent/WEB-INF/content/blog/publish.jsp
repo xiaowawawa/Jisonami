@@ -8,8 +8,8 @@
 </head>
 <body>
 	<form action="publish.do" method="post">
-		标题：<input type="text" /><br/><br/>
-		正文：<textarea rows="20" cols="100"></textarea><br/>
+		标题：<input name="title" type="text" /><br/><br/>
+		正文：<textarea name="content" rows="20" cols="100"></textarea><br/>
 		<input type="submit" value="发布"/>
 	</form>
 </body>
