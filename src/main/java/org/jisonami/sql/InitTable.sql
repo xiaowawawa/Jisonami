@@ -8,6 +8,7 @@ create table t_blog(
 	id varchar(50) primary key,
 	title varchar(20) not null,
 	content clob not null,
+	author varchar(20) not null,
 	blogType varchar(20),
 	publishTime date,
 	editTime date

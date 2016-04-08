@@ -7,6 +7,7 @@ public class Blog {
 	private String title;
 	private String content;
 	private String blogType;
+	private String author;
 	private Date publishTime;
 	private Date editTime;
 	public String getId() {
@@ -45,4 +46,11 @@ public class Blog {
 	public void setEditTime(Date editTime) {
 		this.editTime = editTime;
 	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	
 }
