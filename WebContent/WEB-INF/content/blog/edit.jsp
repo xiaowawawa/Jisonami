@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>发表文章</title>
+<title>修改文章</title>
 </head>
 <body>
 
