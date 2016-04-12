@@ -11,6 +11,14 @@
   	<url-pattern>/login.do</url-pattern>
   </servlet-mapping>
   <servlet>
+  	<servlet-name>logout</servlet-name>
+  	<servlet-class>org.jisonami.account.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>logout</servlet-name>
+  	<url-pattern>/logout.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
   	<servlet-name>register</servlet-name>
   	<servlet-class>org.jisonami.account.RegisterServlet</servlet-class>
   </servlet>

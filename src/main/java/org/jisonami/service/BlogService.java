@@ -31,13 +31,51 @@ public class BlogService {
 		}
 		return false;
 	}
-	public boolean edit(Blog blog){
-		
-		return false;
+	public boolean delete(String id) throws SQLException{
+		Connection conn = DBUtils.getConnection();
+		String sql = "delete from t_blog t where t.id = ?";
+		PreparedStatement preStmt = conn.prepareStatement(sql);
+		preStmt.setString(1, id);
+		int rowChanges = preStmt.executeUpdate();
+		if(rowChanges != 0){
+			return true;
+		} else {
+			return false;
+		}
 	}
-	public Blog query(String id){
+	public boolean edit(Blog blog) throws SQLException{
+		Connection conn = DBUtils.getConnection();
+		String sql = "update t_blog t set t.title = ? , t.content = ? where t.id = ?";
+		PreparedStatement preStmt = conn.prepareStatement(sql);
+		preStmt.setString(1, blog.getTitle());
+		preStmt.setString(2, blog.getContent());
+		preStmt.setString(3, blog.getId());
+		int rowChanges = preStmt.executeUpdate();
+		if(rowChanges != 0){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public Blog queryById(String id) throws SQLException, IOException{
+		Connection conn = DBUtils.getConnection();
+		String sql = "select * from t_blog t where t.id = ?";
+		PreparedStatement preStmt = conn.prepareStatement(sql);
+		preStmt.setString(1, id);
+		ResultSet rs = preStmt.executeQuery();
 		
-		return null;
+		// 根据id查应该是只有一行数据的
+		Blog blog = new Blog();
+		if(rs.next()){
+			blog.setId(rs.getString("id"));
+			blog.setTitle(rs.getString("title"));
+			blog.setContent(JDBCUtils.clobToString(rs.getClob("content")));
+		}
+		
+		rs.close();
+		preStmt.close();
+		conn.close();
+		return blog;
 	}
 	public List<Blog> queryByAuthor(String author) throws SQLException, IOException{
 		Connection conn = DBUtils.getConnection();

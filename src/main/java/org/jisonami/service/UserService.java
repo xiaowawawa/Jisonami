@@ -42,6 +42,32 @@ public class UserService {
 		}
 		return false;
 	}
+	public boolean delete(String id) throws SQLException{
+		Connection conn = DBUtils.getConnection();
+		String sql = "delete from t_user t where t.id = ?";
+		PreparedStatement preStmt = conn.prepareStatement(sql);
+		preStmt.setString(1, id);
+		int rowChanges = preStmt.executeUpdate();
+		if(rowChanges != 0){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public boolean edit(User user) throws SQLException{
+		Connection conn = DBUtils.getConnection();
+		String sql = "update t_user t set t.name = ? , t.password = ? where t.id = ?";
+		PreparedStatement preStmt = conn.prepareStatement(sql);
+		preStmt.setString(1, user.getName());
+		preStmt.setString(2, user.getPassword());
+		preStmt.setString(3, user.getId());
+		int rowChanges = preStmt.executeUpdate();
+		if(rowChanges != 0){
+			return true;
+		} else {
+			return false;
+		}
+	}
 	public boolean exits(User user) throws SQLException{
 		if(query(user.getName())){
 			return true;
