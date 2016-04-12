@@ -7,6 +7,6 @@
 <title>修改文章</title>
 </head>
 <body>
-
+	正文内容
 </body>
 </html>
