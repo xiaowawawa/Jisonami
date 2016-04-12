@@ -10,7 +10,7 @@
 <title>博客首页</title>
 </head>
 <body>
-	<%out.print(request.getSession().getAttribute("username")+", "); %><a href="/Jisonami/login.jsp">退出</a><br/>
+	<%out.print(request.getSession().getAttribute("username")+", "); %><a href="/Jisonami/logout.do">退出</a><br/>
 	博客管理<br/>
 	<a href="/Jisonami/blog/publishForward.do">发表文章</a><br/>
 	<a href="blog/publishForward.do">分类管理</a><br/><br/>
