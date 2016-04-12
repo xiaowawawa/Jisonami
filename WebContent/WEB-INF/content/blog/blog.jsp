@@ -25,6 +25,7 @@
 			out.print("<br/>");
 			out.println(blog.getContent());
 			out.print("<br/></br/>");
+			out.print("<a href='/Jisonami/blog/EditForward.do'>编辑</a>");
 		}
 	%>
 </body>
