@@ -1,0 +1,26 @@
+/* 整体样式 */
+body{
+	background:#F2F2F2;
+	font-size:14px;
+}
+.blod-font{
+	font-weight: bold;
+}
+
+#loginform{
+	margin:150px auto;
+	padding:80px;
+	height:100px;
+	width:280px;
+	background:#E6E6E6;
+/* 	border:1px solid #A0A0A0; */
+}
+#user{
+	margin:10px;
+}
+#pass{
+	margin:10px;
+}
+#control{
+	margin:10px;
+}
