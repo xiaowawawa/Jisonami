@@ -22,7 +22,7 @@ public class PublishServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// »ñÈ¡Ò³ÃæblogĞÅÏ¢
+		// è·å–é¡µé¢blogä¿¡æ¯
 		Blog blog = new Blog();
 		blog.setTitle(req.getParameter("title"));
 		blog.setContent(req.getParameter("content"));
@@ -32,9 +32,9 @@ public class PublishServlet extends HttpServlet{
 			blogService.save(blog);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			// ÌáÊ¾·¢²¼Ê§°Ü
+			// æç¤ºå‘å¸ƒå¤±è´¥
 		}
-		// ²éÑ¯¸ÃÓÃ»§ÏÂµÄËùÓĞ²©¿Í
+		// æŸ¥è¯¢è¯¥ç”¨æˆ·ä¸‹çš„æ‰€æœ‰åšå®¢
 		List<Blog> blogs;
 		try {
 			blogs = blogService.queryByAuthor(req.getSession().getAttribute("username").toString());
@@ -43,7 +43,7 @@ public class PublishServlet extends HttpServlet{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// ÌáÊ¾·¢²¼³É¹¦£¬3ÃëºóÌø×ªµ½blogÒ³Ãæ
+		// æç¤ºå‘å¸ƒæˆåŠŸï¼Œ3ç§’åè·³è½¬åˆ°blogé¡µé¢
 		req.getRequestDispatcher("/WEB-INF/content/blog/blog.jsp").forward(req, resp);
 	}
 }

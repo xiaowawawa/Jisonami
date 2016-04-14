@@ -64,7 +64,7 @@ public class BlogService {
 		preStmt.setString(1, id);
 		ResultSet rs = preStmt.executeQuery();
 		
-		// 根据id查应该是只有一行数据的
+		// 鏍规嵁id鏌ュ簲璇ユ槸鍙湁涓�琛屾暟鎹殑
 		Blog blog = new Blog();
 		if(rs.next()){
 			blog.setId(rs.getString("id"));
