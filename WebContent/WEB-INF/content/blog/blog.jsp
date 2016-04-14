@@ -12,40 +12,10 @@
 	<script src="Resources/js/blog/blogIndex.js"></script>
 </head>
 <body>
-	<div id="headermenu" class="headermenu">
-		<span id="logo" class="logo">
-			<img alt="Jisonami" src="Resources/images/logo/Jisonami-Logo.png" />
-		</span>
-		<div id="menu">
-		<div id="sitemenu">
-			<a href="index.jsp">首页</a>
-			<a href="index.jsp">博客</a>
-			<a href="index.jsp">论坛</a>
-			<a href="index.jsp">问答</a>
-			<a href="index.jsp">商城</a>
-			<a href="index.jsp">网盘</a>
-			<a href="index.jsp">搜索</a>
-			<a href="index.jsp">更多</a>
-		</div>
-		<div id="usermenu">
-			欢迎<%out.print(request.getSession().getAttribute("username")+", "); %><a href="/Jisonami/logout.do">退出</a><br/>
-		</div>
-		</div>
-	</div><br/>
-	<div class="header">
-		<span id="myblog">我的博客</span>
-	</div>
+	<jsp:include page="blogheader_templet.jsp"></jsp:include>
 	
 	<div class="content">
-		<div id="blogmenu">
-		<span class="blod-font">博客管理</span><br/>
-		<a href="/Jisonami/blog/publishForward.do">发表文章</a><br/>
-		<a href="blog/publishForward.do">分类管理</a><br/><br/>
-		<span class="blod-font">文章管理</span><br/>
-		<a href="blog/publishForward.do">全部博客</a><br/>
-		<a href="blog/publishForward.do">草稿箱</a><br/>
-		<a href="blog/publishForward.do">回收站</a><br/><br/>
-		</div>
+		<jsp:include page="blogmenu_templet.jsp"></jsp:include>
 		
 		<div id="blogcontent">
 			<span id="blogtitlleheader" class="blod-font">标题</span>
@@ -89,10 +59,6 @@
 		</div>
 	</div>
 	
-	<div class="footer">
-		<div class="copyright">
-			<span>Copyright © 2016 By jisonami All Rights Reserved.</span>
-		</div>
-	</div>
+	<jsp:include page="../copyright_templet.jsp"></jsp:include>
 </body>
 </html>
