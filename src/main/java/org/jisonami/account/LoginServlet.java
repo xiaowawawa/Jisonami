@@ -21,24 +21,24 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// »ñÈ¡ÓÃ»§µÇÂ½ĞÅÏ¢
+		// è·å–ç”¨æˆ·ç™»é™†ä¿¡æ¯
 		User user = new User();
 		user.setName(req.getParameter("username"));
 		user.setPassword(req.getParameter("password"));
-		// ÑéÖ¤ÓÃ»§ĞÅÏ¢ÊÇ·ñÓëÊı¾İ¿âÆ¥Åä
+		// éªŒè¯ç”¨æˆ·ä¿¡æ¯æ˜¯å¦ä¸æ•°æ®åº“åŒ¹é…
 		UserService userService = new UserService();
 		try {
 			if(userService.validate(user)){
-				// ÈôÆ¥Åä£¬Ìø×ªµ½blogÖ÷Ò³
+				// è‹¥åŒ¹é…ï¼Œè·³è½¬åˆ°blogä¸»é¡µ
 				req.getSession().setAttribute("username", user.getName());
-				// ²éÑ¯¸ÃÓÃ»§ÏÂµÄËùÓĞ²©¿Í
+				// æŸ¥è¯¢è¯¥ç”¨æˆ·ä¸‹çš„æ‰€æœ‰åšå®¢
 				BlogService blogService = new BlogService();
 				List<Blog> blogs = blogService.queryByAuthor(user.getName());
 				req.setAttribute("blogs", blogs);
 				req.getRequestDispatcher("/WEB-INF/content/blog/blog.jsp").forward(req, resp);
 			} else {
-				// Èô²»Æ¥Åä£¬ÌáÊ¾ÓÃ»§Ãû»òÃÜÂë´íÎó
-				req.setAttribute("error", "ÓÃ»§Ãû»òÃÜÂë´íÎó£¡");
+				// è‹¥ä¸åŒ¹é…ï¼Œæç¤ºç”¨æˆ·åæˆ–å¯†ç é”™è¯¯
+				req.setAttribute("error", "ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯ï¼");
 				req.getRequestDispatcher("login.jsp").forward(req, resp);
 			}
 		} catch (SQLException e) {

@@ -1,3 +1,3 @@
-# É¾±í
+# åˆ è¡¨
 drop table t_user;
 drop table t_blog;

@@ -21,26 +21,26 @@ public class RegisterServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// »ñÈ¡ÓÃ»§×¢²áĞÅÏ¢
+		// è·å–ç”¨æˆ·æ³¨å†Œä¿¡æ¯
 		User user = new User();
 		user.setName(req.getParameter("username"));
 		user.setPassword(req.getParameter("password"));
-		// ÑéÖ¤Êı¾İ¿âÀïÊÇ·ñÒÑ×¢²á
+		// éªŒè¯æ•°æ®åº“é‡Œæ˜¯å¦å·²æ³¨å†Œ
 		UserService userService = new UserService();
 		try {
 			if(userService.exits(user)){
-				// ÌáÊ¾¸ÃÓÃ»§ÒÑ×¢²á
-				req.setAttribute("error", "ÓÃ»§ÃûÒÑ´æÔÚ£¡");
+				// æç¤ºè¯¥ç”¨æˆ·å·²æ³¨å†Œ
+				req.setAttribute("error", "ç”¨æˆ·åå·²å­˜åœ¨ï¼");
 				req.getRequestDispatcher("register.jsp").forward(req, resp);
 			} else {
-				// ½«ÓÃ»§ĞÅÏ¢´æµ½Êı¾İ¿â
+				// å°†ç”¨æˆ·ä¿¡æ¯å­˜åˆ°æ•°æ®åº“
 				try {
 					userService.save(user);
 				} catch (SQLException e) {
 					e.printStackTrace();
-					// ÌáÊ¾×¢²áÊ§°Ü
+					// æç¤ºæ³¨å†Œå¤±è´¥
 				}
-				// ÌáÊ¾×¢²á³É¹¦£¬3Ãëºó²¢Ìø×ªµ½µÇÂ½Ò³Ãæ
+				// æç¤ºæ³¨å†ŒæˆåŠŸï¼Œ3ç§’åå¹¶è·³è½¬åˆ°ç™»é™†é¡µé¢
 				resp.sendRedirect("login.jsp");
 			}
 		} catch (SQLException e) {

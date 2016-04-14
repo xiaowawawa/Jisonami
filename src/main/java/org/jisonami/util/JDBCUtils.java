@@ -8,8 +8,8 @@ import java.sql.SQLException;
 
 public class JDBCUtils {
 	 public static String clobToString(Clob clob) throws SQLException, IOException {   
-	        String reString = "";   //Æ´½Ó±äÁ¿
-	        Reader is = clob.getCharacterStream();// µÃµ½Á÷   
+	        String reString = "";   //æ‹¼æ¥å˜é‡
+	        Reader is = clob.getCharacterStream();// å¾—åˆ°æµ   
 	        BufferedReader br = new BufferedReader(is);   
 	        String s = br.readLine();   
 	        StringBuffer sb = new StringBuffer();   
@@ -17,7 +17,7 @@ public class JDBCUtils {
 	        sb.append(s);   
 	        s = br.readLine();   
 	        }   
-	        reString = sb.toString(); //×ª»»³É×Ö·û´®£¬½øĞĞ·µ»Ø  
+	        reString = sb.toString(); //è½¬æ¢æˆå­—ç¬¦ä¸²ï¼Œè¿›è¡Œè¿”å›  
 	    return reString;   
 	    }   
 }

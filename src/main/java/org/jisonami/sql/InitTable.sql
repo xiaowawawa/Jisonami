@@ -1,4 +1,4 @@
-# 建表操作
+# 寤鸿〃鎿嶄綔
 create table t_user(
 	id varchar(50) primary key,
 	name varchar(20) not null,
@@ -14,6 +14,6 @@ create table t_blog(
 	editTime date
 );
 
-# 删表
+# 鍒犺〃
 # drop table t_user;
 # drop table t_blog;
