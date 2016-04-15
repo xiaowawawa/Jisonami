@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>登陆页面</title>
-<link href="Resources/css/account/login.css" type="text/css" rel="stylesheet">
+<link href="/Jisonami/Resources/css/account/login.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 	<span style="color:red">
@@ -16,7 +16,7 @@
 		}
 	%>
 	</span>
-	<div id="loginform">
+	<div id="loginForm">
 		<form action="login.do" method="post">
 			<div id="user">
 				用户名：<input name="username" type="text" /><br/>

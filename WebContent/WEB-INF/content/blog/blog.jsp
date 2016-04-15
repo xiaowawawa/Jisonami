@@ -1,7 +1,9 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="org.jisonami.entity.Blog" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -39,7 +41,12 @@
 			</span>
 			<span id="publishtime">
 			<%
-					out.println(blog.getPublishTime());
+					SimpleDateFormat formator = new SimpleDateFormat("yyyy-MM-dd");
+					String publishTime = null;
+					if(blog.getPublishTime() != null){
+						publishTime = formator.format(blog.getPublishTime());
+					}
+					out.println(publishTime);
 			%>
 			</span>
 			<span id="blogtype">

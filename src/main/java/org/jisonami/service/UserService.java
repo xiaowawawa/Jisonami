@@ -48,6 +48,8 @@ public class UserService {
 		PreparedStatement preStmt = conn.prepareStatement(sql);
 		preStmt.setString(1, id);
 		int rowChanges = preStmt.executeUpdate();
+		preStmt.close();
+		conn.close();
 		if(rowChanges != 0){
 			return true;
 		} else {
@@ -62,6 +64,8 @@ public class UserService {
 		preStmt.setString(2, user.getPassword());
 		preStmt.setString(3, user.getId());
 		int rowChanges = preStmt.executeUpdate();
+		preStmt.close();
+		conn.close();
 		if(rowChanges != 0){
 			return true;
 		} else {

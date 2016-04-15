@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +18,13 @@ public class BlogService {
 	public boolean save(Blog blog) throws SQLException{
 		blog.setId(StringUtils.generateUUID());
 		Connection conn = DBUtils.getConnection();
-		String sql = "insert into t_blog(id, title, content, author) values(?, ?, ?, ?)";
+		String sql = "insert into t_blog(id, title, content, author, publishTime) values(?, ?, ?, ?, ?)";
 		PreparedStatement preStmt = conn.prepareStatement(sql);
 		preStmt.setString(1, blog.getId());
 		preStmt.setString(2, blog.getTitle());
 		preStmt.setString(3, blog.getContent());
 		preStmt.setString(4, blog.getAuthor());
+		preStmt.setTimestamp(5, new Timestamp(blog.getPublishTime().getTime()));
 		int rowChange = preStmt.executeUpdate();
 		preStmt.close();
 		conn.close();
@@ -37,6 +39,8 @@ public class BlogService {
 		PreparedStatement preStmt = conn.prepareStatement(sql);
 		preStmt.setString(1, id);
 		int rowChanges = preStmt.executeUpdate();
+		preStmt.close();
+		conn.close();
 		if(rowChanges != 0){
 			return true;
 		} else {
@@ -51,6 +55,8 @@ public class BlogService {
 		preStmt.setString(2, blog.getContent());
 		preStmt.setString(3, blog.getId());
 		int rowChanges = preStmt.executeUpdate();
+		preStmt.close();
+		conn.close();
 		if(rowChanges != 0){
 			return true;
 		} else {
@@ -90,6 +96,7 @@ public class BlogService {
 			blog.setId(rs.getString("id"));
 			blog.setTitle(rs.getString("title"));
 			blog.setContent(JDBCUtils.clobToString(rs.getClob("content")));
+			blog.setPublishTime(rs.getTimestamp("publishTime"));
 			blogs.add(blog);
 		}
 		

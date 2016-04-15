@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>新用户注册</title>
+<link href="/Jisonami/Resources/css/account/register.css" type="text/css" rel="stylesheet"  />
 </head>
 <body>
 	<span style="color:red">
@@ -15,16 +16,23 @@
 		}
 	%>
 	</span>
-	<form action="register.do" method="post">
-		用户名：
-		<input name="username" type="text" />
-		<br /> 密码：
-		<input name="password" type="text" />
-		<br /> 确认密码：
-		<input name="verifyPassword" type="text" />
-		<br />
-		<input name="register" type="submit" value="注册" />
-		<a href="login.jsp">返回登陆</a>
-	</form>
+	<div id="registerForm">
+		<form action="register.do" method="post">
+			<div id="user">
+				用户名：<input name="username" type="text" /><br /> 
+			</div>
+			<div id="pass">
+				密&nbsp;码：<input name="password" type="password" /><br /> 
+			</div>
+			<div id="verifyPass">
+				确认密码：<input name="verifyPassword" type="password" />
+			<br />
+			</div>
+			<div id="control">
+				<input name="register" type="submit" value="注册" />
+				<a href="login.jsp">返回登陆</a>
+			</div>
+		</form>
+	</div>
 </body>
 </html>

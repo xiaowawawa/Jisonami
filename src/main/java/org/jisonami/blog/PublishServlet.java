@@ -2,6 +2,7 @@ package org.jisonami.blog;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -27,6 +28,7 @@ public class PublishServlet extends HttpServlet{
 		blog.setTitle(req.getParameter("title"));
 		blog.setContent(req.getParameter("content"));
 		blog.setAuthor(req.getSession().getAttribute("username").toString());
+		blog.setPublishTime(new Date());
 		BlogService blogService = new BlogService();
 		try {
 			blogService.save(blog);
