@@ -31,7 +31,8 @@
 			%>
 			<span id="blogtitlle">
 			<%
-					out.println("<a href='/Jisonami/blog/EditForward.do'>");
+					String blogId = blog.getId();
+					out.println("<a href='/Jisonami/blog/ViewForward.do?blogId=" + blogId + "'>");
 					out.println(blog.getTitle());
 					out.println("</a>");
 			%>
@@ -48,8 +49,8 @@
 			</span>
 			<span id="blogmanager">
 			<%
-					out.print("<a href='/Jisonami/blog/EditForward.do'>编辑</a>&nbsp;");
-					out.print("<a href='/Jisonami/blog/EditForward.do'>删除</a>&nbsp;");
+					out.print("<a href='/Jisonami/blog/EditForward.do?blogId=" + blogId + "'>编辑</a>&nbsp;");
+					out.print("<a href='/Jisonami/blog/delete.do?blogId=" + blogId + "'>删除</a>&nbsp;");
 			%>
 			</span>
 			<%

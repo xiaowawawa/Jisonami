@@ -7,14 +7,14 @@
 	</span>
 	<div id="menu">
 	<div id="sitemenu">
-		<a href="index.jsp">首页</a>
-		<a href="index.jsp">博客</a>
-		<a href="index.jsp">论坛</a>
-		<a href="index.jsp">问答</a>
-		<a href="index.jsp">商城</a>
-		<a href="index.jsp">网盘</a>
-		<a href="index.jsp">搜索</a>
-		<a href="index.jsp">更多</a>
+		<a href="/Jisonami/index.jsp">首页</a>
+		<a href="/Jisonami/index.jsp">博客</a>
+		<a href="/Jisonami/index.jsp">论坛</a>
+		<a href="/Jisonami/index.jsp">问答</a>
+		<a href="/Jisonami/index.jsp">商城</a>
+		<a href="/Jisonami/index.jsp">网盘</a>
+		<a href="/Jisonami/index.jsp">搜索</a>
+		<a href="/Jisonami/index.jsp">更多</a>
 	</div>
 	<div id="usermenu">
 		欢迎<%out.print(request.getSession().getAttribute("username")+", "); %><a href="/Jisonami/logout.do">退出</a><br/>

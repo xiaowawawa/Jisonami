@@ -14,6 +14,7 @@
 		<jsp:include page="blogmenu_templet.jsp"></jsp:include>
 		
 		<div id="blogcontent">
+			<a href="/Jisonami/blog/blogForward.do">返回博客列表</a><br/>
 			<form action="publish.do" method="post">
 				标题：<input name="title" type="text" /><br/><br/>
 				正文：<textarea name="content" rows="20" cols="90"></textarea><br/>
