@@ -13,6 +13,11 @@ create table t_blog(
 	publishTime date,
 	editTime date
 );
+create table t_blogtype(
+  id varchar(50) primary key,
+  blogauthor varchar(20) not null,
+  name varchar(20) not null
+);
 
 # 删表
 # drop table t_user;

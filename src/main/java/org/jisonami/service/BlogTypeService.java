@@ -57,7 +57,7 @@ public class BlogTypeService {
 	}
 	public List<BlogType> queryByAuthor(String blogAuthor) throws SQLException{
 		Connection conn = DBUtils.getConnection();
-		String sql = "select t_blogtype t where t.blogAuthor = ?";
+		String sql = "select * from t_blogtype t where t.blogAuthor = ?";
 		PreparedStatement preStmt = conn.prepareStatement(sql);
 		preStmt.setString(1, blogAuthor);
 		ResultSet rs = preStmt.executeQuery();
