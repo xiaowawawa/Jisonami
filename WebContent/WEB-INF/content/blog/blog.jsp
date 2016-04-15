@@ -8,8 +8,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>博客首页</title>
-	<link href="Resources/css/blog/blogIndex.css" type="text/css" rel="stylesheet" />
-	<script src="Resources/js/blog/blogIndex.js"></script>
+	<link href="/Jisonami/Resources/css/blog/blogIndex.css" type="text/css" rel="stylesheet" />
+	<script src="/Jisonami/Resources/js/blog/blogIndex.js"></script>
 </head>
 <body>
 	<jsp:include page="blogheader_templet.jsp"></jsp:include>

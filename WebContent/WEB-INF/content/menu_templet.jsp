@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<link href="Resources/css/common/menu_templet.css" type="text/css" rel="stylesheet" />
+<link href="/Jisonami/Resources/css/common/menu_templet.css" type="text/css" rel="stylesheet" />
 <div id="headermenu" class="headermenu">
 	<span id="logo" class="logo">
-		<img alt="Jisonami" src="Resources/images/logo/Jisonami-Logo.png" />
+		<img alt="Jisonami" src="/Jisonami/Resources/images/logo/Jisonami-Logo.png" />
 	</span>
 	<div id="menu">
 	<div id="sitemenu">

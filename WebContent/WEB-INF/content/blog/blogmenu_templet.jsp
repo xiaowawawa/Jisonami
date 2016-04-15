@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<link href="Resources/css/blog/blogmenu_templet.css" type="text/css" rel="stylesheet" />
+<link href="/Jisonami/Resources/css/blog/blogmenu_templet.css" type="text/css" rel="stylesheet" />
 <div id="blogmenu">
 	<span class="blod-font">博客管理</span><br/>
 	<a href="/Jisonami/blog/publishForward.do">发表文章</a><br/>
