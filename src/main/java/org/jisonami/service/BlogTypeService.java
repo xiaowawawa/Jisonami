@@ -28,7 +28,7 @@ public class BlogTypeService {
 		}
 		return false;
 	}
-	public boolean remove(String blogTypeId) throws SQLException{
+	public boolean delete(String blogTypeId) throws SQLException{
 		Connection conn = DBUtils.getConnection();
 		String sql = "delete from t_blogtype t where t.id = ?";
 		PreparedStatement preStmt = conn.prepareStatement(sql);

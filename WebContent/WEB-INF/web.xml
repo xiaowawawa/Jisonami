@@ -58,6 +58,14 @@
   	<servlet-name>blogTypeManager</servlet-name>
   	<url-pattern>/blog/blogtype/blogTypeManager.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>blogTypeDelete</servlet-name>
+  	<servlet-class>org.jisonami.blog.blogtype.BlogTypeDeleteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>blogTypeDelete</servlet-name>
+  	<url-pattern>/blog/blogtype/blogTypeDelete.do</url-pattern>
+  </servlet-mapping>
   
   <!-- 跳转Servlet -->
   <servlet>

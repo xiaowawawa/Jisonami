@@ -38,7 +38,6 @@
 			<%
 					String blogTypeId = blogtype.getId();
 					out.println(blogtype.getName());
-					out.println("</a>");
 			%>
 			</span>
 			<span id="articleNumber">
@@ -49,7 +48,7 @@
 			<span id="blogmanager">
 			<%
 					out.print("<a href='/Jisonami/blog/EditForward.do?blogTypeId=" + blogTypeId + "'>编辑</a>&nbsp;");
-					out.print("<a href='/Jisonami/blog/delete.do?blogTypeId=" + blogTypeId + "'>删除</a>&nbsp;");
+					out.print("<a href='/Jisonami/blog/blogtype/blogTypeDelete.do?blogTypeId=" + blogTypeId + "'>删除</a>&nbsp;");
 			%>
 			</span>
 			<%
