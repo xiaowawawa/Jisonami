@@ -5,13 +5,13 @@ create table t_user(
 	password varchar(20) not null
 );
 create table t_blog(
-	id varchar(50) primary key,
-	title varchar(20) not null,
-	content clob not null,
-	author varchar(20) not null,
-	blogType varchar(20),
-	publishTime date,
-	editTime date
+  id varchar(50) primary key,
+  title varchar(20) not null,
+  content clob not null,
+  author varchar(20) not null,
+  blogType varchar(4000),
+  publishTime date,
+  editTime date
 );
 create table t_blogtype(
   id varchar(50) primary key,

@@ -4,6 +4,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="org.jisonami.entity.Blog" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="org.jisonami.service.BlogTypeService" %>
+<%@ page import="java.util.Arrays" %>
+<%@ page import="org.jisonami.entity.BlogType" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -24,7 +27,7 @@
 			<span id="publishtimeheader" class="blod-font">发表时间</span>
 			<span id="blogtypeheader" class="blod-font">分类</span>
 			<span id="blogmanagerheader" class="blod-font">管理</span>
-			<br/>
+			<br/><br/>
 			<%
 				List<Blog> blogs = (List<Blog>) request.getAttribute("blogs");
 			%>
@@ -51,7 +54,16 @@
 			</span>
 			<span id="blogtype">
 			<%
-					out.println(blog.getBlogType());
+					BlogTypeService blogTypeService = new BlogTypeService();
+					List<String> blogTypeIds = Arrays.asList(blog.getBlogType().split(","));
+					for(int i=0;i<blogTypeIds.size();i++){
+						String blogTypeId = blogTypeIds.get(i);
+						BlogType blogType = blogTypeService.queryById(blogTypeId);
+						out.println(blogType.getName());
+						if(i < blogTypeIds.size()-1){
+							out.println(",<br/>");
+						}
+					}
 			%>
 			</span>
 			<span id="blogmanager">
@@ -61,7 +73,7 @@
 			%>
 			</span>
 			<%
-					out.print("<br/>");
+					out.print("<br/><br/>");
 				}
 			%>
 		</div>

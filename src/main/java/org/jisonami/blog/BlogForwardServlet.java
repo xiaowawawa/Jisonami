@@ -22,13 +22,18 @@ public class BlogForwardServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		String blogTypeId = req.getParameter("blogTypeId");
 		BlogService blogService = new BlogService();
 		// 查询该用户下的所有博客
-		List<Blog> blogs;
+		List<Blog> blogs = null;
 		try {
-			blogs = blogService.queryByAuthor(req.getSession().getAttribute("username").toString());
+			if(blogTypeId!=null && !"".equals(blogTypeId)){
+				blogs = blogService.queryByBlogType(blogTypeId);
+			} else {
+				blogs = blogService.queryByAuthor(req.getSession().getAttribute("username").toString());
+			}
 			req.setAttribute("blogs", blogs);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -74,4 +74,22 @@ public class BlogTypeService {
 		conn.close();
 		return blogTypes;
 	}
+	public BlogType queryById(String blogTypeId) throws SQLException{
+		Connection conn = DBUtils.getConnection();
+		String sql = "select * from t_blogtype t where t.id = ?";
+		PreparedStatement preStmt = conn.prepareStatement(sql);
+		preStmt.setString(1, blogTypeId);
+		ResultSet rs = preStmt.executeQuery();
+		BlogType blogType = null;
+		if(rs.next()){
+			blogType = new BlogType();
+			blogType.setId(rs.getString("id"));
+			blogType.setBlogAuthor(rs.getString("blogauthor"));
+			blogType.setName(rs.getString("name"));
+		}
+		rs.close();
+		preStmt.close();
+		conn.close();
+		return blogType;
+	}
 }

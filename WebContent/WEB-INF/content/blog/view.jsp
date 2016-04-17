@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ page import="org.jisonami.entity.Blog" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,10 +16,22 @@
 		<jsp:include page="blogmenu_templet.jsp"></jsp:include>
 		
 		<div id="blogcontent">
-			<a href="/Jisonami/blog/blogForward.do">返回博客列表</a><br/>
+			<a href="/Jisonami/blog/blogForward.do">返回博客列表</a><br/><br/>
 			<input name="blogId" type="hidden" value="<%=((Blog)request.getAttribute("blog")).getId() %>"/>
 			博客标题：<%=((Blog)request.getAttribute("blog")).getTitle() %>
-			<br/>
+			<br/><br/>
+			<%
+					Blog blog = (Blog)request.getAttribute("blog");
+					SimpleDateFormat formator = new SimpleDateFormat("yyyy-MM-dd");
+					String publishTime = null;
+					if(blog.getPublishTime() != null){
+						publishTime = formator.format(blog.getPublishTime());
+					}
+					out.println(publishTime);
+			%>
+			<br/><br/>
+			博客类型：<%=request.getAttribute("blogTypes") %>
+			<br/><br/>
 			<%=((Blog)request.getAttribute("blog")).getContent() %>
 		</div>
 	</div>

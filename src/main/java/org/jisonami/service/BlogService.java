@@ -18,13 +18,14 @@ public class BlogService {
 	public boolean save(Blog blog) throws SQLException{
 		blog.setId(StringUtils.generateUUID());
 		Connection conn = DBUtils.getConnection();
-		String sql = "insert into t_blog(id, title, content, author, publishTime) values(?, ?, ?, ?, ?)";
+		String sql = "insert into t_blog(id, title, content, author, blogType, publishTime) values(?, ?, ?, ?, ?, ?)";
 		PreparedStatement preStmt = conn.prepareStatement(sql);
 		preStmt.setString(1, blog.getId());
 		preStmt.setString(2, blog.getTitle());
 		preStmt.setString(3, blog.getContent());
 		preStmt.setString(4, blog.getAuthor());
-		preStmt.setTimestamp(5, new Timestamp(blog.getPublishTime().getTime()));
+		preStmt.setString(5, blog.getBlogType());
+		preStmt.setTimestamp(6, new Timestamp(blog.getPublishTime().getTime()));
 		int rowChange = preStmt.executeUpdate();
 		preStmt.close();
 		conn.close();
@@ -49,11 +50,13 @@ public class BlogService {
 	}
 	public boolean edit(Blog blog) throws SQLException{
 		Connection conn = DBUtils.getConnection();
-		String sql = "update t_blog t set t.title = ? , t.content = ? where t.id = ?";
+		String sql = "update t_blog t set t.title = ? , t.content = ? , t.blogtype = ? , t.edittime = ? where t.id = ?";
 		PreparedStatement preStmt = conn.prepareStatement(sql);
 		preStmt.setString(1, blog.getTitle());
 		preStmt.setString(2, blog.getContent());
-		preStmt.setString(3, blog.getId());
+		preStmt.setString(3, blog.getBlogType());
+		preStmt.setTimestamp(4, new Timestamp(blog.getEditTime().getTime()));
+		preStmt.setString(5, blog.getId());
 		int rowChanges = preStmt.executeUpdate();
 		preStmt.close();
 		conn.close();
@@ -75,7 +78,10 @@ public class BlogService {
 		if(rs.next()){
 			blog.setId(rs.getString("id"));
 			blog.setTitle(rs.getString("title"));
+			blog.setBlogType(rs.getString("blogtype"));
+			blog.setAuthor(rs.getString("author"));
 			blog.setContent(JDBCUtils.clobToString(rs.getClob("content")));
+			blog.setPublishTime(rs.getTimestamp("publishTime"));
 		}
 		
 		rs.close();
@@ -96,6 +102,8 @@ public class BlogService {
 			blog.setId(rs.getString("id"));
 			blog.setTitle(rs.getString("title"));
 			blog.setContent(JDBCUtils.clobToString(rs.getClob("content")));
+			blog.setAuthor(rs.getString("author"));
+			blog.setBlogType(rs.getString("blogtype"));
 			blog.setPublishTime(rs.getTimestamp("publishTime"));
 			blogs.add(blog);
 		}
@@ -105,6 +113,44 @@ public class BlogService {
 		conn.close();
 		return blogs;
 	}
+	public List<Blog> queryByBlogType(String blogTypeId) throws SQLException, IOException{
+		Connection conn = DBUtils.getConnection();
+		String sql = "select * from t_blog t where t.blogtype like ?";
+		PreparedStatement preStmt = conn.prepareStatement(sql);
+		preStmt.setString(1, "%"+blogTypeId+"%");
+		ResultSet rs = preStmt.executeQuery();
+		
+		List<Blog> blogs = new ArrayList<Blog>();
+		while(rs.next()){
+			Blog blog = new Blog();
+			blog.setId(rs.getString("id"));
+			blog.setTitle(rs.getString("title"));
+			blog.setContent(JDBCUtils.clobToString(rs.getClob("content")));
+			blog.setAuthor(rs.getString("author"));
+			blog.setBlogType(rs.getString("blogtype"));
+			blog.setPublishTime(rs.getTimestamp("publishTime"));
+			blogs.add(blog);
+		}
+		
+		rs.close();
+		preStmt.close();
+		conn.close();
+		return blogs;
+	}
+	public int blogCountByBlogType(String blogTypeId) throws SQLException{
+		Connection conn = DBUtils.getConnection();
+		String sql = "select * from t_blog t where t.blogtype like ?";
+		PreparedStatement preStmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		preStmt.setString(1, "%"+blogTypeId+"%");
+		ResultSet rs = preStmt.executeQuery();
+		rs.last();
+		int rowCount = rs.getRow();
+		rs.close();
+		preStmt.close();
+		conn.close();
+		return rowCount;
+	}
+	
 	
 	public static void main(String[] args) throws SQLException, IOException {
 		new BlogService().queryByAuthor("jison");

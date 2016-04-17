@@ -30,19 +30,22 @@
 			<br/>
 			<%
 				List<BlogType> blogTypes = (List<BlogType>) request.getAttribute("blogTypes");
+				List<Integer> blogCounts = (List<Integer>) request.getAttribute("blogCounts");
 			%>
 			<%
-				for(BlogType blogtype: blogTypes){
+				for(int i=0;i<blogTypes.size();i++){
+					BlogType blogType = blogTypes.get(i);
+					int blogCount = blogCounts.get(i);
 			%>
 			<span id="blogTypeName">
 			<%
-					String blogTypeId = blogtype.getId();
-					out.println(blogtype.getName());
+					String blogTypeId = blogType.getId();
+					out.println(blogType.getName());
 			%>
 			</span>
 			<span id="articleNumber">
 			<%
-					out.println();
+					out.println(blogCount);
 			%>
 			</span>
 			<span id="blogmanager">

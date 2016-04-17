@@ -2,6 +2,7 @@ package org.jisonami.blog;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -26,6 +27,8 @@ public class EditServlet extends HttpServlet{
 		blog.setId(req.getParameter("blogId"));
 		blog.setTitle(req.getParameter("title"));
 		blog.setContent(req.getParameter("content"));
+		blog.setBlogType(req.getParameter("blogTypeIds"));
+		blog.setEditTime(new Date());
 		BlogService blogService = new BlogService();
 		boolean result = false;
 		try {
