@@ -101,6 +101,14 @@
   	<url-pattern>/blog/blogForward.do</url-pattern>
   </servlet-mapping>
   <servlet>
+  	<servlet-name>blogIndexForward</servlet-name>
+  	<servlet-class>org.jisonami.blog.BlogIndexForwardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>blogIndexForward</servlet-name>
+  	<url-pattern>/blog/blogIndexForward.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
   	<servlet-name>blogTypeManagerForward</servlet-name>
   	<servlet-class>org.jisonami.blog.blogtype.BlogTypeManagerForwardServlet</servlet-class>
   </servlet>

@@ -12,9 +12,9 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>博客首页</title>
-	<link href="/Jisonami/Resources/css/blog/blogIndex.css" type="text/css" rel="stylesheet" />
-	<script src="/Jisonami/Resources/js/blog/blogIndex.js"></script>
+	<title>我的博客</title>
+	<link href="/Jisonami/Resources/css/blog/blog.css" type="text/css" rel="stylesheet" />
+	<script src="/Jisonami/Resources/js/blog/blog.js"></script>
 </head>
 <body>
 	<jsp:include page="blogheader_templet.jsp"></jsp:include>
@@ -54,14 +54,17 @@
 			</span>
 			<span id="blogtype">
 			<%
-					BlogTypeService blogTypeService = new BlogTypeService();
-					List<String> blogTypeIds = Arrays.asList(blog.getBlogType().split(","));
-					for(int i=0;i<blogTypeIds.size();i++){
-						String blogTypeId = blogTypeIds.get(i);
-						BlogType blogType = blogTypeService.queryById(blogTypeId);
-						out.println(blogType.getName());
-						if(i < blogTypeIds.size()-1){
-							out.println(",<br/>");
+					String blogTypes = blog.getBlogType();
+					if(blogTypes!=null && !"".equals(blogTypes)){
+						BlogTypeService blogTypeService = new BlogTypeService();
+						List<String> blogTypeIds = Arrays.asList(blogTypes.split(","));
+						for(int i=0;i<blogTypeIds.size();i++){
+							String blogTypeId = blogTypeIds.get(i);
+							BlogType blogType = blogTypeService.queryById(blogTypeId);
+							out.println(blogType.getName());
+							if(i < blogTypeIds.size()-1){
+								out.println(",<br/>");
+							}
 						}
 					}
 			%>

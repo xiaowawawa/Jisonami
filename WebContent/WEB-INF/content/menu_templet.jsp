@@ -17,7 +17,18 @@
 		<a href="/Jisonami/index.jsp">更多</a>
 	</div>
 	<div id="usermenu">
-		欢迎<%out.print(request.getSession().getAttribute("username")+", "); %><a href="/Jisonami/logout.do">退出</a><br/>
+		<%
+			Object username = request.getSession().getAttribute("username");
+			if(username!=null){
+				out.print("欢迎"+username+", ");
+				out.println("<a href='/Jisonami/blog/blogForward.do'>我的博客</a>");
+				out.println("<a href='/Jisonami/logout.do'>退出</a><br/>");
+			} else {
+				out.print("您还未登录！");
+				out.println("<a href='/Jisonami/login.jsp'>登录</a>");
+				out.println("<a href='/Jisonami/register.jsp'>注册</a><br/>");
+			}
+		%>
 	</div>
 	</div>
 </div><br/>

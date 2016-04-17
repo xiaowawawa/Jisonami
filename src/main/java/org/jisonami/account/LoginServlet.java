@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 				BlogService blogService = new BlogService();
 				List<Blog> blogs = blogService.queryByAuthor(user.getName());
 				req.setAttribute("blogs", blogs);
-				req.getRequestDispatcher("/WEB-INF/content/blog/blog.jsp").forward(req, resp);
+				req.getRequestDispatcher("/WEB-INF/content/blog/blogIndex.jsp").forward(req, resp);
 			} else {
 				// 若不匹配，提示用户名或密码错误
 				req.setAttribute("error", "用户名或密码错误！");

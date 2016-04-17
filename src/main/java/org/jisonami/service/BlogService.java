@@ -66,6 +66,29 @@ public class BlogService {
 			return false;
 		}
 	}
+	public List<Blog> query() throws SQLException, IOException{
+		Connection conn = DBUtils.getConnection();
+		String sql = "select * from t_blog";
+		PreparedStatement preStmt = conn.prepareStatement(sql);
+		ResultSet rs = preStmt.executeQuery();
+		
+		List<Blog> blogs = new ArrayList<Blog>();
+		while(rs.next()){
+			Blog blog = new Blog();
+			blog.setId(rs.getString("id"));
+			blog.setTitle(rs.getString("title"));
+			blog.setContent(JDBCUtils.clobToString(rs.getClob("content")));
+			blog.setAuthor(rs.getString("author"));
+			blog.setBlogType(rs.getString("blogtype"));
+			blog.setPublishTime(rs.getTimestamp("publishTime"));
+			blogs.add(blog);
+		}
+		
+		rs.close();
+		preStmt.close();
+		conn.close();
+		return blogs;
+	}
 	public Blog queryById(String id) throws SQLException, IOException{
 		Connection conn = DBUtils.getConnection();
 		String sql = "select * from t_blog t where t.id = ?";
