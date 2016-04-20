@@ -11,6 +11,7 @@
 <%-- <%response.sendRedirect("login.jsp"); %> --%>
 <!-- 已登录，跳转到blog首页 -->
 <%-- <%request.getRequestDispatcher("/WEB-INF/content/blog/blog.jsp").forward(request, response); %> --%>
-<%response.sendRedirect("login.jsp"); %>
+<%-- <%response.sendRedirect("login.jsp"); %> --%>
+<%request.getRequestDispatcher("/blog/blogIndexForward.do").forward(request, response); %>
 </body>
 </html>

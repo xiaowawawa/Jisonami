@@ -15,12 +15,13 @@ import org.jisonami.entity.BlogType;
 import org.jisonami.service.BlogService;
 import org.jisonami.service.BlogTypeService;
 
-public class EditForwardServlet extends HttpServlet {
+public class ViewForwardServlet extends HttpServlet{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -61,7 +62,6 @@ public class EditForwardServlet extends HttpServlet {
 			req.setAttribute("blogTypes", blogTypes);
 		}
 		
-		req.getRequestDispatcher("/WEB-INF/content/blog/edit.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/content/blog/view.jsp").forward(req, resp);
 	}
-
 }

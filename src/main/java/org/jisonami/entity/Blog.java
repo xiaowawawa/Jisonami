@@ -1,8 +1,14 @@
 package org.jisonami.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Blog {
+public class Blog implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public Blog(){}
 	private String id;
 	private String title;
 	private String content;

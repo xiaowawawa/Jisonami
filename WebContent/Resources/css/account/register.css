@@ -1,6 +1,6 @@
 @import "../common/common.css";
 
-#loginForm{
+#registerForm{
 	margin:150px auto;
 	padding:80px;
 	height:100px;
@@ -12,6 +12,9 @@
 	margin:10px;
 }
 #pass{
+	margin:10px;
+}
+#verifyPadd{
 	margin:10px;
 }
 #control{

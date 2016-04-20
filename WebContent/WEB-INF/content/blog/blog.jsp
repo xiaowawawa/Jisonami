@@ -1,15 +1,20 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="org.jisonami.entity.Blog" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="org.jisonami.service.BlogTypeService" %>
+<%@ page import="java.util.Arrays" %>
+<%@ page import="org.jisonami.entity.BlogType" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>博客首页</title>
-	<link href="Resources/css/blog/blogIndex.css" type="text/css" rel="stylesheet" />
-	<script src="Resources/js/blog/blogIndex.js"></script>
+	<title>我的博客</title>
+	<link href="/Jisonami/Resources/css/blog/blog.css" type="text/css" rel="stylesheet" />
+	<script src="/Jisonami/Resources/js/blog/blog.js"></script>
 </head>
 <body>
 	<jsp:include page="blogheader_templet.jsp"></jsp:include>
@@ -22,7 +27,7 @@
 			<span id="publishtimeheader" class="blod-font">发表时间</span>
 			<span id="blogtypeheader" class="blod-font">分类</span>
 			<span id="blogmanagerheader" class="blod-font">管理</span>
-			<br/>
+			<br/><br/>
 			<%
 				List<Blog> blogs = (List<Blog>) request.getAttribute("blogs");
 			%>
@@ -31,29 +36,47 @@
 			%>
 			<span id="blogtitlle">
 			<%
-					out.println("<a href='/Jisonami/blog/EditForward.do'>");
+					String blogId = blog.getId();
+					out.println("<a href='/Jisonami/blog/ViewForward.do?blogId=" + blogId + "'>");
 					out.println(blog.getTitle());
 					out.println("</a>");
 			%>
 			</span>
 			<span id="publishtime">
 			<%
-					out.println(blog.getPublishTime());
+					SimpleDateFormat formator = new SimpleDateFormat("yyyy-MM-dd");
+					String publishTime = null;
+					if(blog.getPublishTime() != null){
+						publishTime = formator.format(blog.getPublishTime());
+					}
+					out.println(publishTime);
 			%>
 			</span>
 			<span id="blogtype">
 			<%
-					out.println(blog.getBlogType());
+					String blogTypes = blog.getBlogType();
+					if(blogTypes!=null && !"".equals(blogTypes)){
+						BlogTypeService blogTypeService = new BlogTypeService();
+						List<String> blogTypeIds = Arrays.asList(blogTypes.split(","));
+						for(int i=0;i<blogTypeIds.size();i++){
+							String blogTypeId = blogTypeIds.get(i);
+							BlogType blogType = blogTypeService.queryById(blogTypeId);
+							out.println(blogType.getName());
+							if(i < blogTypeIds.size()-1){
+								out.println(",<br/>");
+							}
+						}
+					}
 			%>
 			</span>
 			<span id="blogmanager">
 			<%
-					out.print("<a href='/Jisonami/blog/EditForward.do'>编辑</a>&nbsp;");
-					out.print("<a href='/Jisonami/blog/EditForward.do'>删除</a>&nbsp;");
+					out.print("<a href='/Jisonami/blog/EditForward.do?blogId=" + blogId + "'>编辑</a>&nbsp;");
+					out.print("<a href='/Jisonami/blog/delete.do?blogId=" + blogId + "'>删除</a>&nbsp;");
 			%>
 			</span>
 			<%
-					out.print("<br/>");
+					out.print("<br/><br/>");
 				}
 			%>
 		</div>
