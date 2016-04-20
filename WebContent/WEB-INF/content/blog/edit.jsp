@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ include file="/Resources/jsp/common/taglibs.jsp" %>
-<%@ page import="org.jisonami.entity.Blog" %>
-<%@ page import="java.util.List" %>
-<%@ page import="org.jisonami.entity.BlogType" %>
-<%@ page import="org.jisonami.service.BlogTypeService" %>
-<%@ page import="java.sql.SQLException" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,39 +19,20 @@
 		<div id="blogcontent">
 			<a href="${_ctxPath }/blog/blogForward.do">返回博客列表</a><br/><br/>
 			<form action="edit.do" method="post">
-				<input name="blogId" type="hidden" value="<%=((Blog)request.getAttribute("blog")).getId() %>"/>
-				标题：<input id="blogTitle" name="title" type="text" value="<%=((Blog)request.getAttribute("blog")).getTitle() %>" /><br/><br/>
-				博客分类：<input id="blogTypes" name="blogTypes" type="text" value="<%=request.getAttribute("blogTypes") %>" /><br/>
-				<input id="blogTypeIds" name="blogTypeIds" type="hidden" value="<%=request.getAttribute("blogTypeIds") %>" />
-				<%
-					String username = request.getSession().getAttribute("username").toString();
-					BlogTypeService blogTypeService = new BlogTypeService();
-					List<BlogType> blogTypes = null;
-					try {
-						blogTypes = blogTypeService.queryByAuthor(username);
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-					int blogTypesCount = blogTypes.size();
-					pageContext.setAttribute("blogTypesCount", blogTypesCount);
-					for(int i=0;i<blogTypesCount;i++){
-						BlogType blogType = blogTypes.get(i);
-						out.println("<input name='blogType' id='blogType" + i + "' blogTypeId='" + blogType.getId() +
-								"' blogTypeName='" + blogType.getName() + "' type='checkbox' ");
-						if(request.getAttribute("blogTypes")!=null){
-							String blogTypeStrings = request.getAttribute("blogTypes").toString();
-							if(blogTypeStrings.contains(blogType.getName())){
-								out.println("checked='checked'");
-							}
-						}
-						out.println("/>");
-						out.println(blogType.getName());
-						out.println("&nbsp;");
-					}
-				%>
+				<input name="blogId" type="hidden" value="${blog.id }"/>
+				标题：<input id="blogTitle" name="title" type="text" value="${blog.title }" /><br/><br/>
+				博客分类：<input id="blogTypes" name="blogTypes" type="text" value="${blogTypes }" /><br/>
+				<input id="blogTypeIds" name="blogTypeIds" type="hidden" value="${blogTypeIds }" />
+				<c:forEach var="blogType" items="${blogTypeList }">
+					<input name='blogType' blogTypeId='${blogType.id }' blogTypeName='${blogType.name }' type='checkbox' 
+						<c:if test='${fn:contains(blogTypes, blogType.name) }'>
+							checked='checked'
+						</c:if>
+					/>${blogType.name }&nbsp;
+				</c:forEach>
 				<br/><br/>
 				正文：<textarea name="content" rows="20" cols="90">
-					<%=((Blog)request.getAttribute("blog")).getContent() %>
+					${blog.content }
 				</textarea><br/>
 				<input type="submit" value="发布"/>
 			</form>

@@ -25,25 +25,9 @@
 				标题：<input id="blogTitle" name="title" type="text" /><br/><br/>
 				博客分类：<input id="blogTypes" name="blogTypes" type="text" /><br/>
 				<input id="blogTypeIds" name="blogTypeIds" type="hidden" />
-				<%
-					String username = request.getSession().getAttribute("username").toString();
-					BlogTypeService blogTypeService = new BlogTypeService();
-					List<BlogType> blogTypes = null;
-					try {
-						blogTypes = blogTypeService.queryByAuthor(username);
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-					int blogTypesCount = blogTypes.size();
-					pageContext.setAttribute("blogTypesCount", blogTypesCount);
-					for(int i=0;i<blogTypesCount;i++){
-						BlogType blogType = blogTypes.get(i);
-						out.println("<input name='blogType' id='blogType" + i + "' blogTypeId='" + blogType.getId() +
-								"' blogTypeName='" + blogType.getName() + "' type='checkbox' />");
-						out.println(blogType.getName());
-						out.println("&nbsp;");
-					}
-				%>
+				<c:forEach var="blogType" items="${blogTypeList }">
+					<input name='blogType' blogTypeId='${blogType.id }' blogTypeName='${blogType.name }' type='checkbox' />${blogType.name }&nbsp;
+				</c:forEach>
 				<br/><br/>
 				正文：<textarea name="content" rows="20" cols="90"></textarea><br/>
 				<input type="submit" value="发布"/>

@@ -61,6 +61,15 @@ public class EditForwardServlet extends HttpServlet {
 			req.setAttribute("blogTypes", blogTypes);
 		}
 		
+		String username = req.getSession().getAttribute("username").toString();
+		List<BlogType> blogTypeList = null;
+		try {
+			blogTypeList = blogTypeService.queryByAuthor(username);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		req.setAttribute("blogTypeList", blogTypeList);
+		
 		req.getRequestDispatcher("/WEB-INF/content/blog/edit.jsp").forward(req, resp);
 	}
 
