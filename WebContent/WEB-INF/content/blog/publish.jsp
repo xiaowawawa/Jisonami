@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ include file="/Resources/jsp/common/taglibs.jsp" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.jisonami.entity.BlogType" %>
 <%@ page import="org.jisonami.service.BlogTypeService" %>
@@ -9,8 +10,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>发表文章</title>
-	<link href="/Jisonami/Resources/css/blog/publish.css" type="text/css" rel="stylesheet" />
-	<script type="text/javascript" src="/Jisonami/Resources/js/blog/publish.js"></script>
+	<link href="${_ctxPath }/Resources/css/blog/publish.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="${_ctxPath }/Resources/js/blog/publish.js"></script>
 </head>
 <body>
 <jsp:include page="blogheader_templet.jsp"></jsp:include>
@@ -19,7 +20,7 @@
 		<jsp:include page="blogmenu_templet.jsp"></jsp:include>
 		
 		<div id="blogcontent">
-			<a href="/Jisonami/blog/blogForward.do">返回博客列表</a><br/><br/>
+			<a href="${_ctxPath }/blog/blogForward.do">返回博客列表</a><br/><br/>
 			<form action="publish.do" method="post">
 				标题：<input id="blogTitle" name="title" type="text" /><br/><br/>
 				博客分类：<input id="blogTypes" name="blogTypes" type="text" /><br/>
@@ -50,6 +51,6 @@
 		</div>
 	</div>
 	
-<jsp:include page="../copyright_templet.jsp"></jsp:include>
+<jsp:include page="/Resources/jsp/common/copyright_templet.jsp"></jsp:include>
 </body>
 </html>
