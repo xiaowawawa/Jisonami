@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ include file="/Resources/jsp/common/taglibs.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>新用户注册</title>
-<link href="/Jisonami/Resources/css/account/register.css" type="text/css" rel="stylesheet"  />
+<link href="${_ctxPath }/Resources/css/account/register.css" type="text/css" rel="stylesheet"  />
 </head>
 <body>
+	<jsp:include page="/Resources/jsp/common/menu_templet.jsp"></jsp:include>
+
 	<span style="color:red">
 	<%
 		Object error = request.getAttribute("error");
@@ -34,5 +37,7 @@
 			</div>
 		</form>
 	</div>
+	
+	<jsp:include page="/Resources/jsp/common/copyright_templet.jsp"></jsp:include>
 </body>
 </html>

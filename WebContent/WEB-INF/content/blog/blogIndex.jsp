@@ -1,6 +1,6 @@
-<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ include file="/Resources/jsp/common/taglibs.jsp" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.jisonami.entity.Blog" %>
 <%@ page import="java.text.SimpleDateFormat" %>
@@ -13,11 +13,11 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>博客首页</title>
-	<link href="/Jisonami/Resources/css/blog/blogIndex.css" type="text/css" rel="stylesheet" />
-	<script src="/Jisonami/Resources/js/blog/blogIndex.js"></script>
+	<link href="${_ctxPath }/Resources/css/blog/blogIndex.css" type="text/css" rel="stylesheet" />
+	<script src="${_ctxPath }/Resources/js/blog/blogIndex.js"></script>
 </head>
 <body>
-	<jsp:include page="../menu_templet.jsp"></jsp:include>
+	<jsp:include page="/Resources/jsp/common/menu_templet.jsp"></jsp:include>
 	<div class="content">
 		<div id="blogmenu">
 			全站分类
@@ -32,7 +32,7 @@
 			<span id="blogtitlle">
 			<%
 					String blogId = blog.getId();
-					out.println("<a href='/Jisonami/blog/ViewForward.do?blogId=" + blogId + "'>");
+					out.println("<a href='${_ctxPath }/blog/ViewForward.do?blogId=" + blogId + "'>");
 					out.println(blog.getTitle());
 					out.println("</a>");
 			%>
@@ -60,6 +60,6 @@
 			%>
 		</div>
 	</div>
-	<jsp:include page="../copyright_templet.jsp"></jsp:include>
+	<jsp:include page="/Resources/jsp/common/copyright_templet.jsp"></jsp:include>
 </body>
 </html>

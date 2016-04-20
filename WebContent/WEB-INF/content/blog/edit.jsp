@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ include file="/Resources/jsp/common/taglibs.jsp" %>
 <%@ page import="org.jisonami.entity.Blog" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.jisonami.entity.BlogType" %>
@@ -10,8 +11,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>修改文章</title>
-	<link href="/Jisonami/Resources/css/blog/edit.css" type="text/css" rel="stylesheet" />
-	<script type="text/javascript" src="/Jisonami/Resources/js/blog/edit.js"></script>
+	<link href="${_ctxPath }/Resources/css/blog/edit.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="${_ctxPath }/Resources/js/blog/edit.js"></script>
 </head>
 <body>
 	<jsp:include page="blogheader_templet.jsp"></jsp:include>
@@ -20,7 +21,7 @@
 		<jsp:include page="blogmenu_templet.jsp"></jsp:include>
 		
 		<div id="blogcontent">
-			<a href="/Jisonami/blog/blogForward.do">返回博客列表</a><br/><br/>
+			<a href="${_ctxPath }/blog/blogForward.do">返回博客列表</a><br/><br/>
 			<form action="edit.do" method="post">
 				<input name="blogId" type="hidden" value="<%=((Blog)request.getAttribute("blog")).getId() %>"/>
 				标题：<input id="blogTitle" name="title" type="text" value="<%=((Blog)request.getAttribute("blog")).getTitle() %>" /><br/><br/>
@@ -61,6 +62,6 @@
 		</div>
 	</div>
 	
-<jsp:include page="../copyright_templet.jsp"></jsp:include>
+<jsp:include page="/Resources/jsp/common/copyright_templet.jsp"></jsp:include>
 </body>
 </html>

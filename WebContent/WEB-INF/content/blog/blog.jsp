@@ -1,6 +1,6 @@
-<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ include file="/Resources/jsp/common/taglibs.jsp" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.jisonami.entity.Blog" %>
 <%@ page import="java.text.SimpleDateFormat" %>
@@ -13,8 +13,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>我的博客</title>
-	<link href="/Jisonami/Resources/css/blog/blog.css" type="text/css" rel="stylesheet" />
-	<script src="/Jisonami/Resources/js/blog/blog.js"></script>
+	<link href="${_ctxPath }/Resources/css/blog/blog.css" type="text/css" rel="stylesheet" />
+	<script src="${_ctxPath }/Resources/js/blog/blog.js"></script>
 </head>
 <body>
 	<jsp:include page="blogheader_templet.jsp"></jsp:include>
@@ -37,7 +37,7 @@
 			<span id="blogtitlle">
 			<%
 					String blogId = blog.getId();
-					out.println("<a href='/Jisonami/blog/ViewForward.do?blogId=" + blogId + "'>");
+					out.println("<a href='${_ctxPath }/blog/ViewForward.do?blogId=" + blogId + "'>");
 					out.println(blog.getTitle());
 					out.println("</a>");
 			%>
@@ -71,8 +71,8 @@
 			</span>
 			<span id="blogmanager">
 			<%
-					out.print("<a href='/Jisonami/blog/EditForward.do?blogId=" + blogId + "'>编辑</a>&nbsp;");
-					out.print("<a href='/Jisonami/blog/delete.do?blogId=" + blogId + "'>删除</a>&nbsp;");
+					out.print("<a href='${_ctxPath }/blog/EditForward.do?blogId=" + blogId + "'>编辑</a>&nbsp;");
+					out.print("<a href='${_ctxPath }/blog/delete.do?blogId=" + blogId + "'>删除</a>&nbsp;");
 			%>
 			</span>
 			<%
@@ -82,6 +82,6 @@
 		</div>
 	</div>
 	
-	<jsp:include page="../copyright_templet.jsp"></jsp:include>
+	<jsp:include page="/Resources/jsp/common/copyright_templet.jsp"></jsp:include>
 </body>
 </html>

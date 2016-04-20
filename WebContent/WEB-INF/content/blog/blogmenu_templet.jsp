@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ include file="/Resources/jsp/common/taglibs.jsp" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.jisonami.entity.BlogType" %>
 <%@ page import="org.jisonami.service.BlogTypeService" %>
 <%@ page import="org.jisonami.service.BlogService" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.util.ArrayList" %>
-<link href="/Jisonami/Resources/css/blog/blogmenu_templet.css" type="text/css" rel="stylesheet" />
+<link href="${_ctxPath }/Resources/css/blog/blogmenu_templet.css" type="text/css" rel="stylesheet" />
 <div id="blogmenu">
 	<span class="blod-font">博客管理</span><br/>
-	<a href="/Jisonami/blog/publishForward.do">发表文章</a><br/>
-	<a href="/Jisonami/blog/blogtype/blogTypeManagerForward.do">分类管理</a><br/><br/>
+	<a href="${_ctxPath }/blog/publishForward.do">发表文章</a><br/>
+	<a href="${_ctxPath }/blog/blogtype/blogTypeManagerForward.do">分类管理</a><br/><br/>
 	<span class="blod-font">文章管理</span><br/>
 	<%
 		String username = request.getSession().getAttribute("username").toString();
@@ -34,7 +35,7 @@
 		}
 		
 		int allBlogCount = blogService.queryByAuthor(username).size();
-		out.print("<a href='/Jisonami/blog/blogForward.do'>全部博客");
+		out.print("<a href='${_ctxPath }/blog/blogForward.do'>全部博客");
 		out.print("(" + allBlogCount + ")");
 		out.println("</a><br/>");
 	%>
@@ -46,7 +47,7 @@
 	<span id="blogTypeName">
 	<%
 			String blogTypeId = blogType.getId();
-			out.print("<a href='/Jisonami/blog/blogForward.do?blogTypeId=" + blogTypeId + "'>");
+			out.print("<a href='${_ctxPath }/blog/blogForward.do?blogTypeId=" + blogTypeId + "'>");
 			out.print(blogType.getName());
 			out.println("(" + blogCount + ")");
 			out.println("</a>");
