@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ include file="/Resources/jsp/common/taglibs.jsp" %>
-<%@ page import="java.util.List" %>
-<%@ page import="org.jisonami.entity.Blog" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="org.jisonami.service.BlogTypeService" %>
-<%@ page import="java.util.Arrays" %>
-<%@ page import="org.jisonami.entity.BlogType" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -28,57 +22,53 @@
 			<span id="blogtypeheader" class="blod-font">分类</span>
 			<span id="blogmanagerheader" class="blod-font">管理</span>
 			<br/><br/>
-			<%
-				List<Blog> blogs = (List<Blog>) request.getAttribute("blogs");
-			%>
-			<%
-				for(Blog blog: blogs){
-			%>
-			<span id="blogtitlle">
-			<%
-					String blogId = blog.getId();
-					out.println("<a href='${_ctxPath }/blog/ViewForward.do?blogId=" + blogId + "'>");
-					out.println(blog.getTitle());
-					out.println("</a>");
-			%>
-			</span>
-			<span id="publishtime">
-			<%
-					SimpleDateFormat formator = new SimpleDateFormat("yyyy-MM-dd");
-					String publishTime = null;
-					if(blog.getPublishTime() != null){
-						publishTime = formator.format(blog.getPublishTime());
-					}
-					out.println(publishTime);
-			%>
-			</span>
-			<span id="blogtype">
-			<%
-					String blogTypes = blog.getBlogType();
-					if(blogTypes!=null && !"".equals(blogTypes)){
-						BlogTypeService blogTypeService = new BlogTypeService();
-						List<String> blogTypeIds = Arrays.asList(blogTypes.split(","));
-						for(int i=0;i<blogTypeIds.size();i++){
-							String blogTypeId = blogTypeIds.get(i);
-							BlogType blogType = blogTypeService.queryById(blogTypeId);
-							out.println(blogType.getName());
-							if(i < blogTypeIds.size()-1){
-								out.println(",<br/>");
-							}
-						}
-					}
-			%>
-			</span>
-			<span id="blogmanager">
-			<%
-					out.print("<a href='${_ctxPath }/blog/EditForward.do?blogId=" + blogId + "'>编辑</a>&nbsp;");
-					out.print("<a href='${_ctxPath }/blog/delete.do?blogId=" + blogId + "'>删除</a>&nbsp;");
-			%>
-			</span>
-			<%
-					out.print("<br/><br/>");
-				}
-			%>
+			<c:forEach var="blog" items="${blogs }">
+				<span id="blogtitlle">
+				<a href='${_ctxPath }/blog/ViewForward.do?blogId=${blog.id}'>
+					${blog.title }
+				</a>
+				</span>
+				<span id="publishtime">
+					<fmt:formatDate value="${blog.publishTime }" pattern="yyyy-MM-dd" />
+				</span>
+				<span id="blogtype">
+					<!-- 读取数据库配置信息 -->
+					<fmt:bundle basename="/org/jisonami/sql/DBConfig">
+						<fmt:message key="driver" var="driver"></fmt:message>
+						<fmt:message key="url" var="url"></fmt:message>
+						<fmt:message key="user" var="user"></fmt:message>
+						<fmt:message key="pass" var="pass"></fmt:message>
+					</fmt:bundle>
+					<!-- 设置数据源 -->
+					<sql:setDataSource driver="${driver }" url="${url }" user="${user }" password="${pass }"/>
+					<c:set var="blogType" value="${blog.blogType }" ></c:set>
+					<c:set var="blogTypeIds" value="${fn:split(blogType, ',') }"></c:set>
+					<c:set var="blogTypes" value=""></c:set>
+					<c:forEach var="blogTypeId" items="${blogTypeIds }">
+						<sql:query var="result">
+							select * from t_blogtype t where t.id = ?
+							<sql:param value="${blogTypeId }" />
+						</sql:query>
+						<c:choose>
+							<c:when test="${blogTypes!='' }">
+								,<br/>${result.rows[0].name }
+							</c:when>
+							<c:otherwise>
+								${result.rows[0].name }
+							</c:otherwise>
+						</c:choose>
+						<c:if test="${blogTypes!='' }" >
+							<c:set var="blogTypes" value="${blogTypes },"></c:set>
+						</c:if>
+						<c:set var="blogTypes" value="${blogTypes }${result.rows[0].name }"></c:set>
+					</c:forEach>
+				</span>
+				<span id="blogmanager">
+					<a href='${_ctxPath }/blog/EditForward.do?blogId=${blog.id }'>编辑</a>&nbsp;
+					<a href='${_ctxPath }/blog/delete.do?blogId=${blog.id }'>删除</a>&nbsp;
+				</span>
+				<br/><br/>
+			</c:forEach>
 		</div>
 	</div>
 	

@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ include file="/Resources/jsp/common/taglibs.jsp" %>
-<%@ page import="org.jisonami.entity.Blog" %>
-<%@ page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,22 +16,14 @@
 		
 		<div id="blogcontent">
 			<a href="${_ctxPath }/blog/blogForward.do">返回博客列表</a><br/><br/>
-			<input name="blogId" type="hidden" value="<%=((Blog)request.getAttribute("blog")).getId() %>"/>
-			博客标题：<%=((Blog)request.getAttribute("blog")).getTitle() %>
+			<input name="blogId" type="hidden" value="${blog.id }"/>
+			博客标题：${blog.title }
 			<br/><br/>
-			<%
-					Blog blog = (Blog)request.getAttribute("blog");
-					SimpleDateFormat formator = new SimpleDateFormat("yyyy-MM-dd");
-					String publishTime = null;
-					if(blog.getPublishTime() != null){
-						publishTime = formator.format(blog.getPublishTime());
-					}
-					out.println(publishTime);
-			%>
+			<fmt:formatDate value="${blog.publishTime }" pattern="yyyy-MM-dd" />
 			<br/><br/>
-			博客类型：<%=request.getAttribute("blogTypes") %>
+			博客类型：${blogTypes }
 			<br/><br/>
-			<%=((Blog)request.getAttribute("blog")).getContent() %>
+			${blog.content }
 		</div>
 	</div>
 	
