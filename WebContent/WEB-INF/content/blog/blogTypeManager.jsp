@@ -32,6 +32,7 @@
 				List<BlogType> blogTypes = (List<BlogType>) request.getAttribute("blogTypes");
 				List<Integer> blogCounts = (List<Integer>) request.getAttribute("blogCounts");
 			%>
+			
 			<%
 				for(int i=0;i<blogTypes.size();i++){
 					BlogType blogType = blogTypes.get(i);

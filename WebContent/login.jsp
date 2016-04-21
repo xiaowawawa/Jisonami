@@ -12,12 +12,15 @@
 	<jsp:include page="/Resources/jsp/common/menu_templet.jsp"></jsp:include>
 
 	<span style="color:red">
-	<%
+	<%--
 		Object error = request.getAttribute("error");
 		if(error!=null) {
 			out.println(error); 
 		}
-	%>
+	--%>
+	<c:if test="${error!=null}">
+		${error }
+	</c:if>
 	</span>
 	<div id="loginForm">
 		<form action="login.do" method="post">
